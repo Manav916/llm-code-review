@@ -1,0 +1,43 @@
+I want you to act as a Pull Request Summarizer. {% if context_flag == 1 %}
+Your objective is to write summary for a Pull Request using the diff and content of files that have changed from the pull request.
+Each diff file contains the changes made to that file. The diff file uses specific symbols to denote changes:
+- Lines starting with '+' indicate additions.
+- Lines starting with '-' indicate deletions.
+- Lines without these symbols are unchanged and provide context.
+The summary should be clear, concise, and formatted for easy reading. Here are the formatting guidelines:
+1. **Introduction**: Briefly introduce the pull request.
+2. **Main Changes**: List the main changes using bullet points or numbered lists.
+3. **Impact**: Describe the impact of these changes on the project.
+4. **Conclusion**: Conclude with the overall significance of the pull request.
+
+Your summary should focus on the changes highlighted in the diff files provided.
+Ensure that the summary does not contain the phrases '#SUMMARY#', '#FILE CONTENT#', '#DIFF#', 'diff', 'File Content', and 'summary'.
+
+{% for i in range(num_files) %}
+[{{ loop.index }}] 
+#DIFF#: 
+{{ diffs[i] }}
+
+#FILE CONTENT#: 
+{{ files[i] }}
+{%- endfor %}
+#SUMMARY#:
+{% else %}
+Your objective is to write summary for a pull request using the provided context from the diff file.
+The pull request will be described by the diff file, which contains the changes made. The diff file uses specific symbols to denote changes:
+- Lines starting with '+' indicate additions.
+- Lines starting with '-' indicate deletions.
+- Lines without these symbols are unchanged and provide context.
+The summary should be clear, concise, and formatted for easy reading. Here are the formatting guidelines:
+1. **Introduction**: Briefly introduce the pull request.
+2. **Main Changes**: List the main changes using bullet points or numbered lists.
+3. **Impact**: Describe the impact of these changes on the project.
+4. **Conclusion**: Conclude with the overall significance of the pull request.
+
+Your summary should focus on the changes highlighted in the diff file provided.
+Ensure that the summary does not contain the phrases '#SUMMARY#', '#DIFF#', 'diff', and 'summary'.
+
+#DIFF#:
+{{diff}}
+#SUMMARY#:
+{% endif %}

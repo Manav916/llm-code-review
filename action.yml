@@ -1,0 +1,45 @@
+name: 'RepoFixAI'
+description: 'AI-powered code reviews and issue labeling'
+author: 'Manav Manoj'
+inputs:
+  groq_api_key:
+    description: 'GROQ API Key'
+    required: true
+  groq_model:
+    description: 'GROQ Model to use'
+    required: true
+  github_token:
+    description: 'GitHub Token'
+    required: true
+  exclude_extensions:
+    description: 'File extensions to exclude'
+    required: false
+  repo_owner:
+    description: 'Repository owner'
+    required: true
+  repo_name:
+    description: 'Repository name'
+    required: true
+  event_number:
+    description: 'Event number'
+    required: true
+  event_name:
+    description: 'GitHub event name'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - ${{ inputs.event_name }}
+  env:
+    GROQ_API_KEY: ${{ inputs.groq_api_key }}
+    GROQ_MODEL: ${{ inputs.groq_model }}
+    GITHUB_TOKEN: ${{ inputs.github_token }}
+    EXCLUDE_EXTENSIONS: ${{ inputs.exclude_extensions }}
+    REPO_OWNER: ${{ inputs.repo_owner }}
+    REPO_NAME: ${{ inputs.repo_name }}
+    EVENT_NUMBER: ${{ inputs.event_number }}
+
+branding:
+  icon: 'zap'
+  color: 'white'

@@ -1,0 +1,10 @@
+colorama
+python-dotenv
+PyGithub
+requests
+groq
+IPython
+jinja2
+gensim
+transformers
+torch
