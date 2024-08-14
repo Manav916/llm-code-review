@@ -11,8 +11,8 @@ import argparse
 init(autoreset=True)
 
 class Repo:
-    SUMMARY_TEMPLATE_PATH = 'prompt_templates/summary.jinja2'
-    REVIEW_TEMPLATE_PATH = 'prompt_templates/review.jinja2'
+    SUMMARY_TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'prompt_templates', 'summary.jinja2')
+    REVIEW_TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'prompt_templates', 'review.jinja2')
     DEFAULT_EXCLUDES = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico", ".json", ".ipynb"]
 
     def __init__(self):
