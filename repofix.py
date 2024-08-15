@@ -6,6 +6,7 @@ from groq import Groq
 from jinja2 import Template
 import issue_labeller
 import argparse
+import base64
 
 # Initialize Colorama for colorful console output
 init(autoreset=True)
@@ -63,10 +64,11 @@ class Repo:
             model=self.groq_model,
         )
 
-    def _fetch_file_content(self, raw_url):
-        response = requests.get(raw_url)
+    def _fetch_file_content(self, contents_url):
+        response = requests.get(contents_url, headers={"Authorization": f"Bearer {self.github_token}"})
         if response.status_code == 200:
-            return response.text
+            decoded_content = base64.b64decode(response.json()['content']).decode('utf-8')
+            return decoded_content
         else:
             print(Fore.YELLOW + f"Failed to fetch file content. Status code: {response.status_code}")
             return ''
@@ -79,8 +81,8 @@ class Repo:
             filename = pull.get_files()[i].filename
             if not any(filename.endswith(ext) for ext in self.exclude_extensions):
                 patch = pull.get_files()[i].patch
-                raw_url = pull.get_files()[i].raw_url
-                file_content = self._fetch_file_content(raw_url)
+                contents_url = pull.get_files()[i].contents_url
+                file_content = self._fetch_file_content(contents_url)
                 diffs.append(patch)
                 files.append(file_content)
             else:
