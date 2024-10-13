@@ -50,6 +50,7 @@ jobs:
           event_name: ${{ github.event_name }}
 ```
 4. Commit the file to your repository.
+5. Make sure to give read and write permissions to your workflows in settings.
 
 With these steps completed, LLM Code Review will automatically run on new pull requests and issues in your repository.
 
