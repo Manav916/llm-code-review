@@ -54,6 +54,19 @@ jobs:
 
 With these steps completed, LLM Code Review will automatically run on new pull requests and issues in your repository.
 
+## Demo
+### Code Review
+
+
+https://github.com/user-attachments/assets/9ff68224-3f7e-472f-adc7-4ee99f68e3df
+
+
+### Issue Labelling
+
+
+https://github.com/user-attachments/assets/6a9ed60f-a7b8-48d0-a1c6-ecf49e6226c7
+
+
 ## Configuration
 
 You can customize the behavior of LLM Code Review by modifying the workflow file:
